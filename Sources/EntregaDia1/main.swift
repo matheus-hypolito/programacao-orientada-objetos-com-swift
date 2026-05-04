@@ -27,10 +27,7 @@ struct PlanoAssinatura {
         ]
     }
 }
-
-// ----------------------------------------------------
-// ENTIDADES DE NEGÓCIO E HERANÇA COM LÓGICA DAS AULAS
-// ----------------------------------------------------
+    
 
 class Pessoa {
     private(set) var nome: String
@@ -45,7 +42,6 @@ class Pessoa {
         self.senhaDeAcesso = senhaDeAcesso
     }
     
-    // Método validador para encapsulamento
     func validarSenha(_ senhaDigitada: String) -> Bool {
         return self.senhaDeAcesso == senhaDigitada
     }
@@ -57,7 +53,6 @@ class Aluno: Pessoa {
     private(set) var nivel: NivelExperiencia
     private(set) var aulasAssistidas: Int = 0
 
-    // Sacada da Aula 3: Nível não vem no construtor, aluno sempre nasce Iniciante.
     init(nome: String, email: String, matricula: String, plano: PlanoAssinatura, senhaDeAcesso: String) {
         self.matricula = matricula
         self.plano = plano
@@ -65,7 +60,6 @@ class Aluno: Pessoa {
         super.init(nome: nome, email: email, funcao: "Aluno", senhaDeAcesso: senhaDeAcesso)
     }
 
-    // Regra da Aula 4 (Bia/Pedro): Atualização sensível protegida por senha
     func atualizarPlano(novoPlano: PlanoAssinatura, senhaDigitada: String) {
         if validarSenha(senhaDigitada) {
             self.plano = novoPlano
@@ -75,7 +69,6 @@ class Aluno: Pessoa {
         }
     }
 
-    // Regra da Aula 4 (Gabriel/Pedro): Switch para upgrade dinâmico automático
     func registrarAulaAssistida() {
         self.aulasAssistidas += 1
         
