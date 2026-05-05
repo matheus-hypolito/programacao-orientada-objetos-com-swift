@@ -111,3 +111,32 @@ gerenciador.executarManutencaoEmLote()
 print("\n--- TESTE DE AGENDAMENTO ---")
 gerenciador.agendarPersonal(matricula: "1001", nomeInstrutor: "João") 
 gerenciador.agendarPersonal(matricula: "1002", nomeInstrutor: "João")
+
+
+extension GerenciadorAcademia {
+    func gerarRelatorioMetricas() {
+        let totalAlunos = alunosPorMatricula.count
+        let totalInstrutores = instrutores.count
+        let equipamentosDanificados = equipamentos.filter { $0.defeituoso == true }.count
+        
+        print("\n📊 --- DASHBOARD CLRM SCOUT ---")
+        print("👤 Alunos ativos: \(totalAlunos)")
+        print("🏋️ Instrutores na equipe: \(totalInstrutores)")
+        print("🔧 Máquinas na fila de manutenção: \(equipamentosDanificados)")
+        print("-------------------------------\n")
+    }
+}
+
+gerenciador.gerarRelatorioMetricas()
+
+print("--- TESTE DE LISTA MISTA ---")
+
+let listaDePessoas: [Any] = [aluno1, aluno2, Instrutor(nome: "Carlos", especialidade: "Musculação")]
+
+for pessoa in listaDePessoas {
+    if let aluno = pessoa as? Aluno {
+        print("Cadastro encontrado -> Aluno: \(aluno.nome)")
+    } else if let instrutor = pessoa as? Instrutor {
+        print("Cadastro encontrado -> Instrutor: \(instrutor.nome) (Especialidade: \(instrutor.especialidade))")
+    }
+}
